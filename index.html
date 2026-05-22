@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Квест: Отражение · демо</title>
+    <title>Mr.Duck</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            user-select: none; /* для эффекта "не текст, а интерфейс" */
+            user-select: none;
         }
 
         body {
@@ -21,8 +21,6 @@
             font-family: 'Courier New', 'Fira Code', monospace;
             padding: 20px;
         }
-
-        /* эффект старого ЭЛТ-монитора */
         .crt::before {
             content: " ";
             display: block;
@@ -131,21 +129,18 @@
 <div class="container">
     <div class="glitch">// КВЕСТ: ЗЕРКАЛЬНЫЙ ЛАБИРИНТ</div>
     <div class="terminal-line">
-        > Демо-версия интерактивного повествования.<br>
-        > Твой выбор меняет сюжет... или нет?<br>
+        > Демо.<br>
         > <span style="color:#9effb0;">[Версия 0.7.2 — билд "Призрачный глитч"]</span>
     </div>
 
     <div class="question">
-        ⚡ Ты в заброшенном серверном бункере.<br>
-        На мониторе мигает строка:<br>
-        «Чтобы выйти — прими истину»<br>
+        «Рискни»<br>
         <span style="font-size:0.9rem;">_ два пути, но оба ведут к одному</span>
     </div>
 
     <div class="choice">
-        <button id="rickBtn">🔮 Принять вызов</button>
-        <button id="rickBtn2">💀 Открыть дверь</button>
+        <button id="rickBtn">Боишься?</button>
+        <button id="rickBtn2">Не бойся</button>
     </div>
 
     <div class="terminal-line pulse" style="text-align:center; font-size:0.85rem;">
@@ -181,9 +176,7 @@
         }, 800);
     }
 
-    // Оба варианта ведут к рикроллу, но с разным "предтекстом"
     document.getElementById('rickBtn').onclick = () => {
-        // маленькая деталь: меняем текст кнопки, чтобы создать иллюзию смены состояния
         let btn = document.getElementById('rickBtn');
         btn.innerText = '🌀 Вход в матрицу...';
         btn.disabled = true;
