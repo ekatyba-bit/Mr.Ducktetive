@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Mr.Duck | pet project</title>
+    <style>
+      body {
+        font-family: monospace;
+        background: #0a0a0a;
+        color: #0f0;
+        padding: 2rem;
+      }
+      button {
+        background: #1a1a1a;
+        color: #0f0;
+        border: 1px solid #0f0;
+        padding: 12px 24px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🎧 Mystery awaits</h1>
+    <button id="demoBtn">▶ Run demo</button>
+    <canvas
+      id="canvas"
+      width="600"
+      height="200"
+      style="border: 1px solid #0f0; display: none"
+    ></canvas>
+
+    <script>
+      document.getElementById("demoBtn").onclick = function () {
+        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+      };
+    </script>
+  </body>
+</html>
