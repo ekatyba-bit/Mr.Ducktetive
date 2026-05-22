@@ -1,37 +1,204 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Mr.Duck | pet project</title>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Квест: Отражение · демо</title>
     <style>
-      body {
-        font-family: monospace;
-        background: #0a0a0a;
-        color: #0f0;
-        padding: 2rem;
-      }
-      button {
-        background: #1a1a1a;
-        color: #0f0;
-        border: 1px solid #0f0;
-        padding: 12px 24px;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>🎧 Mystery awaits</h1>
-    <button id="demoBtn">▶ Run demo</button>
-    <canvas
-      id="canvas"
-      width="600"
-      height="200"
-      style="border: 1px solid #0f0; display: none"
-    ></canvas>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none; /* для эффекта "не текст, а интерфейс" */
+        }
 
-    <script>
-      document.getElementById("demoBtn").onclick = function () {
-        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-      };
-    </script>
-  </body>
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at 20% 30%, #0a0f1a, #03060c);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Courier New', 'Fira Code', monospace;
+            padding: 20px;
+        }
+
+        /* эффект старого ЭЛТ-монитора */
+        .crt::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0, 255, 0, 0.03) 0px, rgba(0, 255, 0, 0.03) 2px, transparent 2px, transparent 6px);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .container {
+            max-width: 700px;
+            background: rgba(5, 10, 20, 0.75);
+            backdrop-filter: blur(3px);
+            border: 1px solid #1e3b3b;
+            border-radius: 32px;
+            box-shadow: 0 0 30px rgba(0, 255, 170, 0.2), inset 0 0 20px rgba(0,255,200,0.05);
+            padding: 2rem;
+            transition: all 0.2s;
+        }
+
+        .glitch {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #b3ffe0;
+            text-shadow: 2px 2px 0 #0a6b4e, -1px -1px 0 #1f8a72;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            border-left: 3px solid #1effbc;
+            padding-left: 1.2rem;
+        }
+
+        .terminal-line {
+            color: #aaf0d0;
+            margin: 1rem 0;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-left: 2px solid #1e8f6e;
+            padding-left: 1rem;
+        }
+
+        .question {
+            background: #071a17;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            font-weight: bold;
+            color: #afffdd;
+            box-shadow: inset 0 0 8px #0f4a3a, 0 2px 5px rgba(0,0,0,0.4);
+        }
+
+        .choice {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 25px 0 15px;
+        }
+
+        .choice button {
+            background: #0f2120;
+            border: 1px solid #2e9c7c;
+            color: #bef5e5;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: 0.2s;
+            border-radius: 60px;
+            letter-spacing: 0.5px;
+            flex: 1;
+        }
+
+        .choice button:hover {
+            background: #1a4f42;
+            box-shadow: 0 0 12px #1effbc;
+            border-color: #6effda;
+            color: white;
+            text-shadow: 0 0 3px black;
+        }
+
+        .pulse {
+            animation: faintPulse 1.8s infinite;
+        }
+
+        @keyframes faintPulse {
+            0% { opacity: 0.7; text-shadow: 0 0 0px #00ffc3; }
+            50% { opacity: 1; text-shadow: 0 0 4px #00ffc3; }
+            100% { opacity: 0.7; text-shadow: 0 0 0px #00ffc3; }
+        }
+
+        footer {
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            text-align: center;
+            color: #2c6b5a;
+            border-top: 1px dashed #1f5243;
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+<body class="crt">
+<div class="container">
+    <div class="glitch">// КВЕСТ: ЗЕРКАЛЬНЫЙ ЛАБИРИНТ</div>
+    <div class="terminal-line">
+        > Демо-версия интерактивного повествования.<br>
+        > Твой выбор меняет сюжет... или нет?<br>
+        > <span style="color:#9effb0;">[Версия 0.7.2 — билд "Призрачный глитч"]</span>
+    </div>
+
+    <div class="question">
+        ⚡ Ты в заброшенном серверном бункере.<br>
+        На мониторе мигает строка:<br>
+        «Чтобы выйти — прими истину»<br>
+        <span style="font-size:0.9rem;">_ два пути, но оба ведут к одному</span>
+    </div>
+
+    <div class="choice">
+        <button id="rickBtn">🔮 Принять вызов</button>
+        <button id="rickBtn2">💀 Открыть дверь</button>
+    </div>
+
+    <div class="terminal-line pulse" style="text-align:center; font-size:0.85rem;">
+        ⚠️ Квест не сохраняет прогресс. Нажми — и решение станет окончательным.
+    </div>
+    <footer>
+        [experimental js-build] — работа с таймерами, условиями и callback-логикой.
+    </footer>
+</div>
+
+<script>
+    function rickroll() {
+        document.body.style.cursor = "wait";
+        let overlay = document.createElement('div');
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'black';
+        overlay.style.zIndex = '9999';
+        overlay.style.display = 'flex';
+        overlay.style.alignItems = 'center';
+        overlay.style.justifyContent = 'center';
+        overlay.style.color = '#0f0';
+        overlay.style.fontFamily = 'monospace';
+        overlay.style.fontSize = '1.4rem';
+        overlay.innerText = '>> ЗАГРУЗКА ФИНАЛЬНОГО УРОВНЯ...';
+        document.body.appendChild(overlay);
+
+        setTimeout(() => {
+            window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        }, 800);
+    }
+
+    // Оба варианта ведут к рикроллу, но с разным "предтекстом"
+    document.getElementById('rickBtn').onclick = () => {
+        // маленькая деталь: меняем текст кнопки, чтобы создать иллюзию смены состояния
+        let btn = document.getElementById('rickBtn');
+        btn.innerText = '🌀 Вход в матрицу...';
+        btn.disabled = true;
+        document.getElementById('rickBtn2').disabled = true;
+        rickroll();
+    };
+
+    document.getElementById('rickBtn2').onclick = () => {
+        let btn = document.getElementById('rickBtn2');
+        btn.innerText = '🚪 Дверь открыта...';
+        btn.disabled = true;
+        document.getElementById('rickBtn').disabled = true;
+        rickroll();
+    };
+
+</script>
+</body>
 </html>
